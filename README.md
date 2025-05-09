@@ -25,4 +25,18 @@
    ```bash
    git clone https://github.com/your-username/wanderlust.git
    cd wanderlust
+2. Install dependencies:
+npm install
+
+Set up environment variables:
+Create a .env file and add:
+MONGO_URL=your_mongodb_url
+SECRET=your_session_secret
+CLOUDINARY_KEY=your_cloudinary_key
+CLOUDINARY_SECRET=your_cloudinary_secret
+
+Run the server:
+npm start
+Visit:
+Open http://localhost:8080 in your browser
    
