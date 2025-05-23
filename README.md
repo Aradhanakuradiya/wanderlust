@@ -36,7 +36,7 @@
 - CLOUDINARY_SECRET=your_cloudinary_secret
 
 - Run the server:
-- npm start
+- nodemon app.js
 - Visit:
 - Open http://localhost:8080 in your browser
    
