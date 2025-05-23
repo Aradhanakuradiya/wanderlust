@@ -1,3 +1,4 @@
+
 if(process.env.NODE_ENV != "production"){
     require("dotenv").config();
 }
@@ -6,7 +7,6 @@ const app = express();
 const port = 8080;
 const ejsMate = require("ejs-mate");
 const mongoose = require("mongoose");
-const MongoStore = require("connect-mongo");
 const path = require("path");
 const Expresserror = require("./utils/Expresserror.js");
 const session = require("express-session");
@@ -17,7 +17,7 @@ const User = require("./models/user.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
-const MONGO_URL = process.env.URL;
+
 app.set("view engine", "ejs");
 // use ejs-locals for all ejs templates:
 app.engine('ejs', ejsMate);
@@ -34,23 +34,11 @@ main().then(() => {
 });
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
 }
 
-
-const store = MongoStore.create({
-    mongoUrl: MONGO_URL,
-    crypto:{
-        secret: process.env.SECRET
-    },
-    touchAfter: 24 *3600,
-})
-store.on("error",()=>{
-    console.log("error",err);
-})
 const sessionOptions = {
-    store,
-    secret: process.env.SECRET,
+    secret: "mysupersecretcode",
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -59,6 +47,7 @@ const sessionOptions = {
         httpOnly: true,
     }
 };
+
 app.use(session(sessionOptions));
 app.use(flash());
 app.use(passport.initialize());
@@ -76,9 +65,9 @@ app.use((req, res, next) => {
 });
 
 app.use("/", userRouter); 
-// app.get("/", (req, res) => {
-//     res.send("all good");
-// });
+app.get("/", (req, res) => {
+    res.send("all good");
+});
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
