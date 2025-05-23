@@ -24,7 +24,7 @@
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/your-username/wanderlust.git
-   cd wanderlust
+   cd travelbug
 2. Install dependencies:
 - npm install
 
