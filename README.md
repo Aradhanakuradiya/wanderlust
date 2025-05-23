@@ -1,5 +1,5 @@
 
-# Wanderlust 🌍
+# TravelBug 🌍
 
 **Wanderlust** is a  web application that allows users to discover, add, and manage unique travel stays across different locations.
 
